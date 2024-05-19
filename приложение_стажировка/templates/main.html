@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="описание сайта">
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div class="background">
+    <div class="blur"></div>
+</div>
+
+<header class="header">
+    <img src="/static/images/logo.png" width="128px" class="logo">
+    <p>Юридическая фирма <br> "Судебная защита"</p>
+    <div class="clear"></div>
+</header>
+<nav class="menu-main">
+    <ul>
+        <li>
+            <a href="/">Главная</a>
+        </li>
+         <li>
+            <a href="/about">Наша команда</a>
+        </li>
+         <li>
+            <a href="/services">Услуги</a>
+        </li>
+         <li>
+            <a href="/price">Стоимость услуг</a>
+        </li>
+         <li>
+            <a href="/contacts">Контакты</a>
+        </li>
+        {% if not 'login' in request.session %}
+         <li>
+            <a href="/reg">Регистрация</a>
+        </li>
+        <li>
+            <a href="/auth">Авторизация</a>
+        </li>
+        {% endif %}
+
+        {% if 'login' in request.session %}
+         <li>
+            <a href="/panel">Личный кабинет</a>
+        </li>
+         <li>
+            <a href="/logoutuser">Выход</a>
+        </li>
+        {% endif %}
+          <li>
+            <a href="/admin/login">Вход для админа</a>
+        </li>
+    </ul>
+</nav>
+<main class="content">
+    {% block content %}{% endblock %}
+</main>
+<footer class="footer">
+     <ul>
+          <li>
+          Круглосуточный звонок дежурному юристу
+        </li>
+          <li>
+          Телефон дежурного юриста
+        </li>
+           <li>
+          8 (4872) 25-14-30
+        </li>
+           <li>
+          e-mail: urist@gmail.com
+        </li>
+           <li>
+          г. Тула, Проспект Ленина, д. 16, оф. 3
+        </li>
+      </ul>
+</footer>
+
+</body>
+</html>

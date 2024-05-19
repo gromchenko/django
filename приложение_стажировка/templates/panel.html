@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block title %}
+Главная страница
+{% endblock %}
+{% block content %}
+<h1>Личный кабинет</h1>
+<form method="post">
+    {% csrf_token %}
+<ul class="panel">
+    <li>ФИО:  <input type="text" name="fio" value="{{current_user.fio}}"</li>
+    <input type="hidden" name="login" value="{{current_user.login}}">
+     <li>Email: <input type="text" name="email" value="{{current_user.email}}"</li>
+     <li>Phone: <input type="text" name="phone" value="{{current_user.phone}}"</li>
+    <li><button>Обновить</button></li>
+</ul>
+</form>
+
+<ul>
+    {% for dt in freedatetimes %}
+        <li>{{dt.datetime}}
+            <form method="post" action="zap">
+                <input type="hidden" name="id" value="{{dt.id}}">
+                {% csrf_token %}
+                <button>Записаться</button>
+            </form>
+        </li>
+
+    {% endfor %}
+</ul>
+<h2>Назаченные консультации</h2>
+<ul>
+    {% for dt in datetimeusers %}
+        <li>{{dt.datetime}}</li>
+
+    {% endfor %}
+</ul>
+{% endblock %}
